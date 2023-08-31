@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+
+<body>
+    <input type="text" style="width:320PX" name="dateTimeRange" id="dateTimeRange">
+    <script>
+        $(function () {
+            setDaterangepicker()
+        })
+        function setDaterangepicker() {
+            $("#dateTimeRange").daterangepicker({
+                timePicker: true,
+                startDate: moment().startOf('hour'),
+                endDate: moment().startOf('hour').add(32, 'hour'),
+                "locale": {
+                    "format": "YYYY-MM-DD hh:mm:ss a",
+                    "separator": " ~ ",
+                    "applyLabel": "Apply",
+                    "cancelLabel": "Cancel",
+                    "fromLabel": "From",
+                    "toLabel": "To",
+                    "customRangeLabel": "Custom",
+                    "weekLabel": "W",
+                    "daysOfWeek": [
+                        "Su",
+                        "Mo",
+                        "Tu",
+                        "We",
+                        "Th",
+                        "Fr",
+                        "Sa"
+                    ],
+                    "monthNames": [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                        "July",
+                        "August",
+                        "September",
+                        "October",
+                        "November",
+                        "December"
+                    ],
+                    "firstDay": 1
+                },
+            }, function (start, end, label) {
+                startTime = dataDateFormat(moment(start).format())
+                endTime = dataDateFormat(moment(end).format())
+                console.log(startTime, endTime)
+            });
+        }
+        function dataDateFormat(getDate) {
+            var dateTimeList = getDate.split('+');
+            var dateList = dateTimeList[0].split('T');
+            var dateType = dateList[0] + ' ' + dateList[1];
+            return dateType;
+        }
+    </script>
+</body>
+
+</html>
